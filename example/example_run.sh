@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#! /bin/bash
 
 # Example:
 # Identify allelic imbalance (AI) given a tumor 

@@ -82,7 +82,7 @@ BOOST_AUTO_TEST_CASE(isHetTest) {
 	BOOST_REQUIRE_EQUAL(inputProc.isHet('A','?'), false);
 	BOOST_REQUIRE_EQUAL(inputProc.isHet('A','.'), false);
 	BOOST_REQUIRE_EQUAL(inputProc.isHet('A',' '), false);
-	BOOST_REQUIRE_EQUAL(inputProc.isHet('C', NULL), true);
+	BOOST_REQUIRE_EQUAL(inputProc.isHet('C','\0'), true);
 }
 
 BOOST_AUTO_TEST_CASE(readAllelesTest) {

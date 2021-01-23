@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/sh
 
 # Example:
 # Identify allelic imbalance (AI) given a tumor 
@@ -6,6 +6,7 @@
 # of the GATK.  This involves the following 3 steps.
 
 printf "STEP 1: PHASING 1KG HET SITES ...\n"
+mkdir example_output
 python ../scripts/simple_phaser.py \
   --ldmap ../ldmap/hg19.exome.ldmap \
   --vcf example_input/tumor_exome.vcf \

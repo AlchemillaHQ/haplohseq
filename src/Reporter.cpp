@@ -214,13 +214,13 @@ void Reporter::reportBafBasedResults(	std::vector<std::string>& orderedChrs,
 					// if inEvent, output event and reset values
 					if (inEvent && eventState == stateIndex && validEvent) {
 						double posteriorSum = 0;
-						BOOST_FOREACH(double ep, eventPosteriors) {
+						for (double ep : eventPosteriors) {
 							posteriorSum += ep;
 						}
 						double eventPosterior = posteriorSum / (double) eventMarkerCount;
 
 						double switchSum = 0;
-						BOOST_FOREACH(int ss, eventSwitches) {
+						for (int ss : eventSwitches) {
 							switchSum += ss;
 						}
 						double eventPhaseConcordance = switchSum / (double) eventMarkerCount;
@@ -283,13 +283,13 @@ void Reporter::reportBafBasedResults(	std::vector<std::string>& orderedChrs,
 
 								if (validEvent) {
 									double posteriorSum = 0;
-									BOOST_FOREACH(double ep, eventPosteriors) {
+									for (double ep : eventPosteriors) {
 										posteriorSum += ep;
 									}
 									double eventPosterior = posteriorSum / (double) eventMarkerCount;
 
 									double switchSum = 0;
-									BOOST_FOREACH(int ss, eventSwitches) {
+									for (int ss : eventSwitches) {
 										switchSum += ss;
 									}
 									double eventPhaseConcordance = switchSum / (double) eventMarkerCount;
@@ -490,13 +490,13 @@ void Reporter::reportVcfBasedResults(	std::vector<std::string>& orderedChrs,
 					// if inEvent, output event and reset values
 					if (inEvent && eventState == stateIndex && validEvent) {
 						double posteriorSum = 0;
-						BOOST_FOREACH(double ep, eventPosteriors) {
+						for (double ep : eventPosteriors) {
 							posteriorSum += ep;
 						}
 						double eventPosterior = posteriorSum / (double) eventMarkerCount;
 
 						double switchSum = 0;
-						BOOST_FOREACH(int ss, eventSwitches) {
+						for (int ss : eventSwitches) {
 							switchSum += ss;
 						}
 						double eventPhaseConcordance = switchSum / (double) eventMarkerCount;
@@ -559,13 +559,13 @@ void Reporter::reportVcfBasedResults(	std::vector<std::string>& orderedChrs,
 
 								if (validEvent) {
 									double posteriorSum = 0;
-									BOOST_FOREACH(double ep, eventPosteriors) {
+									for (double ep : eventPosteriors) {
 										posteriorSum += ep;
 									}
 									double eventPosterior = posteriorSum / (double) eventMarkerCount;
 
 									double switchSum = 0;
-									BOOST_FOREACH(int ss, eventSwitches) {
+									for (int ss : eventSwitches) {
 										switchSum += ss;
 									}
 									double eventPhaseConcordance = switchSum / (double) eventMarkerCount;

@@ -122,7 +122,7 @@ void HaplohSeq::runBafHaplohseq(	std::string& obsType,
 											chrInformativePos);
 
 	// assemble informative phased alleles
-	BOOST_FOREACH(std::string chr, orderedChrs) {
+	for (auto& chr : orderedChrs) {
 		std::cerr << "Num informative indices " << chr << ": " << chrInformativeIndices[chr].size() << std::endl;
 		std::vector< std::vector<char> > informativePhasedAlleles;
 
@@ -148,7 +148,7 @@ void HaplohSeq::runBafHaplohseq(	std::string& obsType,
 	// get median ref frequency for informative sites
 	haplohseq::FreqPhase fp(inputProc);
 	std::vector<double> refFreqs;
-	BOOST_FOREACH(std::string chr, orderedChrs) {
+	for (auto& chr : orderedChrs) {
 		refFreqs.insert(refFreqs.end(), chrInformativeRefFreqs[chr].begin(), chrInformativeRefFreqs[chr].end());
 	}
 	const double &median = fp.medianValue(refFreqs);
@@ -207,7 +207,7 @@ void HaplohSeq::runBafHaplohseq(	std::string& obsType,
 		}
 
 		std::map<std::string, boost::shared_ptr<Hmm> > chrHmms;
-		BOOST_FOREACH(std::string chr, orderedChrs) {
+		for (auto& chr : orderedChrs) {
 
 			boost::shared_ptr<std::map<std::string, std::vector<char> > > chrInformativeAllelesPtr(new std::map<std::string, std::vector<char> >);
 			(*chrInformativeAllelesPtr)[REF] = chrInformativeRef[chr];
@@ -237,7 +237,7 @@ void HaplohSeq::runBafHaplohseq(	std::string& obsType,
 
 		std::string runOutputPrefix = outputPrefix + "_" + str.doubleToStr(boost::any_cast<double>(primitives[INITIAL_PARAM_EVENT]));
 //		this->report(orderedChrs, chrHmms, vcfInformativeIndices, phasedAlleles, vcfStrFields, vcfIntFields, vcfDoubleFields, destinationDir, runOutputPrefix);
-		BOOST_FOREACH(std::string chr, orderedChrs) {
+		for (auto& chr : orderedChrs) {
 			Hmm &chrHmm = *chrHmms[chr];
 			double chrHmmLikelihood = exp(chrHmm.calcLogProbObs());
 			if (!chrMLE.count(chr)) {
@@ -340,7 +340,8 @@ void HaplohSeq::runVcfHaplohseq(	std::string& obsType,
 	std::cout << "Done loading input files.\n";
 
 	// assemble informative phased alleles
-	BOOST_FOREACH(std::string chr, orderedChrs) {
+	for (auto& chr : orderedChrs) {
+		//std::cout << "Num informative indices for chromosome " << chr << ": " << chrVcfInformativeIndices[chr].size() << std::endl;
 //		std::cout << "Num informative indices for chromosome " << chr << ": " << chrVcfInformativeIndices[chr].size() << std::endl;
 		std::vector< std::vector<char> > informativePhasedAlleles;
 
@@ -366,7 +367,7 @@ void HaplohSeq::runVcfHaplohseq(	std::string& obsType,
 	// get median ref frequency for informative sites
 	haplohseq::FreqPhase fp(inputProc);
 	std::vector<double> refFreqs;
-	BOOST_FOREACH(std::string chr, orderedChrs) {
+	for (auto& chr : orderedChrs) {
 		refFreqs.insert(refFreqs.end(), chrInformativeRefFreqs[chr].begin(), chrInformativeRefFreqs[chr].end());
 	}
 	const double &median = fp.medianValue(refFreqs);
@@ -425,8 +426,7 @@ void HaplohSeq::runVcfHaplohseq(	std::string& obsType,
 		}
 
 		std::map<std::string, boost::shared_ptr<Hmm> > chrHmms;
-		BOOST_FOREACH(std::string chr, orderedChrs) {
-
+		for (auto& chr : orderedChrs) {
 			boost::shared_ptr<std::map<std::string, std::vector<char> > > chrInformativeAllelesPtr(new std::map<std::string, std::vector<char> >);
 			(*chrInformativeAllelesPtr)[REF] = chrInformativeRef[chr];
 			(*chrInformativeAllelesPtr)[ALT] = chrInformativeAlt[chr];
@@ -456,7 +456,8 @@ void HaplohSeq::runVcfHaplohseq(	std::string& obsType,
 
 		std::string runOutputPrefix = outputPrefix + "_" + str.doubleToStr(boost::any_cast<double>(primitives[INITIAL_PARAM_EVENT]));
 //		this->report(orderedChrs, chrHmms, vcfInformativeIndices, phasedAlleles, vcfStrFields, vcfIntFields, vcfDoubleFields, destinationDir, runOutputPrefix);
-		BOOST_FOREACH(std::string chr, orderedChrs) {
+
+		for (auto& chr : orderedChrs) {
 			Hmm &chrHmm = *chrHmms[chr];
 			double chrHmmLikelihood = exp(chrHmm.calcLogProbObs());
 			if (!chrMLE.count(chr)) {
@@ -471,6 +472,7 @@ void HaplohSeq::runVcfHaplohseq(	std::string& obsType,
 
 			chrLikelihoodProfiles[chr].push_back(chrHmmLikelihood);
 		}
+
 		eventParamStartPoints.push_back(boost::any_cast<double>(primitives[INITIAL_PARAM_EVENT]));
 		primitives[INITIAL_PARAM_EVENT] = boost::any_cast<double>(primitives[INITIAL_PARAM_EVENT]) + interval;
 	}

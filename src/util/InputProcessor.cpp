@@ -560,7 +560,7 @@ unsigned long InputProcessor::readVcfInformativeGenotypesChr(
 				std::vector<std::string> headerTokens;
 				str.split(line, delim, headerTokens);
 				unsigned int i = 0;
-				BOOST_FOREACH(std::string col, headerTokens) {
+				for (std::string col : headerTokens) {
 					headerIndices[col] = i++;
 				}
 			}
@@ -584,7 +584,7 @@ unsigned long InputProcessor::readVcfInformativeGenotypesChr(
 		// put in a map for easy access
 		std::map<std::string, std::string> flagValues;
 		int i = 0;
-		BOOST_FOREACH(std::string flag, formatFlags) {
+		for (std::string flag : formatFlags) {
 			flagValues[flag] = formatValues[i++];
 		}
 
